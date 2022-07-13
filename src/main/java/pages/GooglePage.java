@@ -16,9 +16,6 @@ public class GooglePage {
     private final By videosResults = By.xpath("//div[@id='search']/div/div/div[contains(.,'Videos')]//a[not(contains(.,'View all'))]");
     private final By topStoriesResults = By.xpath("//div[@id='search']/div/div/div[contains(.,'Top stories')]//a//div[@role='heading']");
 
-    public GooglePage(WebDriver driver) {
-        this.driver = driver;
-    }
 
     public void searchKey(String keyword) {
         driver.findElement(searchBox).clear();
