@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utilities.actions.Actions;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class GooglePage {
     }
 
     public boolean doesSearchBoxRemainKeyWord(String keyWord) {
-        return driver.findElement(searchBox).getAttribute("value").equals(keyWord);
+        return Actions.getAttribute(searchBox, "value").equals(keyWord);
     }
 
     public boolean doesTheMainResultContainKeyWord(String keyWord) {

@@ -1,5 +1,6 @@
 package utilities.listener;
 
+import helper.BrowserHelper;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,7 @@ public class TestListener implements ITestListener {
         System.out.printf("%s is failed", getTestMethodName(result));
 
         System.out.printf("Screenshot captured for test case: %s", getTestMethodName(result));
-        saveScreenShotPNG(Actions.driver());
+        saveScreenShotPNG(BrowserHelper.driver());
         saveTextLog(getTestMethodName(result) + " failed and screenshot is taken");
     }
 

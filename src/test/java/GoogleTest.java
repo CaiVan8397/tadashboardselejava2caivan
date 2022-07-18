@@ -1,27 +1,19 @@
-import org.openqa.selenium.WebDriver;
+import helper.BrowserHelper;
+import helper.Constant;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.GooglePage;
 import pages.YoutubePage;
 
-public class GoogleTest {
-
-    WebDriver driver = WebDriverFactory.googleDriver();
-    private final GooglePage googlePage = new GooglePage(driver);
-    private final YoutubePage youtubePage = new YoutubePage(driver);
-    String keyword = "can't take my eyes off you";
+public class GoogleTest extends TestBase{
+    GooglePage googlePage = new GooglePage();
+    YoutubePage youtubePage = new YoutubePage();
+    String keyword = "Sonate";
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
-    void beforeMethod() {
-        driver.get("https://www.google.com/");
-        googlePage.searchKey(keyword);
-    }
 
-    @Test
+    @Test(description = "Google test")
     public void theBeatlesGoogleSearchTest() {
         softAssert.assertTrue(googlePage.doesTheMainResultContainKeyWord(keyword), "Some results in the main result do not contain the keyword: " + keyword);
         softAssert.assertTrue(googlePage.doesThePeopleAlsoAskContainKeyWord(keyword), "Some results in the People also ask result do not contain the keyword: " + keyword);
@@ -35,14 +27,12 @@ public class GoogleTest {
     @Test
     public void testYoutube() {
         String timeToPause = "0:10";
+        BrowserHelper.navigateToUrl(Constant.GOOGLE_URL);
+        googlePage.searchKey(keyword);
         googlePage.openTheFirstVideoResult();
         youtubePage.playVideo();
         youtubePage.pauseVideoAt(timeToPause);
+        //The test case always failed
         Assert.assertTrue(youtubePage.getCurrentTime().equals(timeToPause), "Pause video at the wrong time");
-    }
-
-    @AfterClass
-    void afterClass() {
-        driver.close();
     }
 }

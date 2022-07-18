@@ -11,7 +11,7 @@ import org.openqa.selenium.opera.OperaDriver;
 import java.util.concurrent.TimeUnit;
 
 public class BrowserHelper {
-    private static WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver startDriver() {
         WebDriverManager.chromedriver().setup();
@@ -22,30 +22,17 @@ public class BrowserHelper {
         return driver;
     }
 
-    public enum DriverType {CHROME, FIREFOX}
 
-    public static void startDriver(DriverType type) {
-        switch (type) {
-            case CHROME:
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                break;
-            case FIREFOX:
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                break;
-            default:
-                System.out.println("..........");
-                break;
-        }
-        driver.manage().timeouts().implicitlyWait(Constant.DEFAULT_TIME_WAIT, TimeUnit.SECONDS);
+    public static WebDriver driver() {
+        return driver.get();
     }
 
+
     public static void navigateToUrl(String url) {
-        driver.get(url);
+        driver().get(url);
     }
 
     public static void quitBrowser() {
-        driver.close();
+        driver.remove();
     }
 }
