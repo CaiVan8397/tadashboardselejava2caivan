@@ -1,20 +1,24 @@
-package utilities.listener;
+package sele2.com.listeners;
 
-import helper.BrowserHelper;
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.testng.ITestContext;
+import org.slf4j.Logger;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import sele2.com.driver.DriverManager;
+
 
 public class TestListener implements ITestListener {
-    public void onTestFailure(ITestResult result) {
-        System.out.printf("%s is failed", getTestMethodName(result));
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(TestListener.class);
 
-        System.out.printf("Screenshot captured for test case: %s", getTestMethodName(result));
-        saveScreenShotPNG(BrowserHelper.driver());
+    @Override
+    public void onTestFailure(ITestResult result) {
+        log.error("{} is failed", getTestMethodName(result));
+
+        log.error("Screenshot captured for test case: {}", getTestMethodName(result));
+        saveScreenShotPNG(DriverManager.getDriver());
         saveTextLog(getTestMethodName(result) + " failed and screenshot is taken");
     }
 
@@ -32,4 +36,3 @@ public class TestListener implements ITestListener {
         return message;
     }
 }
-

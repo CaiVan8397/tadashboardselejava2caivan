@@ -1,16 +1,17 @@
-package pages;
+package sele2.com.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import utilities.actions.Actions;
+import sele2.com.driver.DriverManager;
+import sele2.com.utilities.Actions;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GooglePage {
-    WebDriver driver;
+
     private final By searchBox = By.xpath("//input[@name='q' and @role='combobox']");
     private final By mainResults = By.xpath("//div[@id='search']/div/div/div[not(contains(.,'People also ask'))]//a/h3");
     private final By peopleAlsoAskResults = By.xpath("//div[@id='search']/div/div/div[contains(.,'People also ask')]//a/h3");
@@ -19,12 +20,12 @@ public class GooglePage {
 
 
     public void searchKey(String keyword) {
-        driver.findElement(searchBox).clear();
-        driver.findElement(searchBox).sendKeys(keyword + Keys.ENTER);
+        DriverManager.getDriver().findElement(searchBox).clear();
+        DriverManager.getDriver().findElement(searchBox).sendKeys(keyword + Keys.ENTER);
     }
 
     public void openTheFirstVideoResult() {
-        driver.findElement(videosResults).click();
+        DriverManager.getDriver().findElement(videosResults).click();
     }
 
     public boolean doesSearchBoxRemainKeyWord(String keyWord) {
@@ -48,7 +49,7 @@ public class GooglePage {
     }
 
     private boolean isTheKeyWordContainedInResults(String keyWord, By locator) {
-        List<String> results = driver.findElements(locator).stream().map(WebElement::getText).filter(t -> !t.isEmpty()).collect(Collectors.toList());
+        List<String> results =  DriverManager.getDriver().findElements(locator).stream().map(WebElement::getText).filter(t -> !t.isEmpty()).collect(Collectors.toList());
         for (String e : results) {
             if (!e.contains(keyWord)) {
                 System.out.println("The result " + e + " does not contains " + keyWord);

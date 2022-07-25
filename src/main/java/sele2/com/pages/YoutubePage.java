@@ -1,4 +1,4 @@
-package pages;
+package sele2.com.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import sele2.com.driver.DriverManager;
 
 public class YoutubePage {
-    WebDriver driver;
     WebDriverWait wait;
     private final By videoScreen = By.xpath("//div[@id='movie_player']");
     private final By playButton = By.xpath("//button[@aria-label='Play']");
@@ -17,20 +17,20 @@ public class YoutubePage {
 
     public void playVideo() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(playButton));
-        driver.findElement(playButton).click();
+        DriverManager.getDriver().findElement(playButton).click();
     }
 
     public void pauseVideoAt(String time) {
-        Actions actions = new Actions(driver);
+        Actions actions = new Actions( DriverManager.getDriver());
         while (!getCurrentTime().equals(time)) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(title));
-            actions.moveToElement(driver.findElement(title)).build().perform();
-            actions.moveToElement(driver.findElement(videoScreen)).build().perform();
+            actions.moveToElement( DriverManager.getDriver().findElement(title)).build().perform();
+            actions.moveToElement( DriverManager.getDriver().findElement(videoScreen)).build().perform();
         }
         actions.sendKeys(Keys.SPACE).build().perform();
     }
 
     public String getCurrentTime() {
-        return driver.findElement(currentTime).getText();
+        return  DriverManager.getDriver().findElement(currentTime).getText();
     }
 }

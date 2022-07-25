@@ -1,11 +1,20 @@
-package utilities.actions;
+package sele2.com.utilities;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.asserts.SoftAssert;
+import sele2.com.driver.DriverManager;
 
 public class Actions {
     private static final ThreadLocal<WebDriver> localDriver = new ThreadLocal<>();
+
+    private static SoftAssert softAssert = new SoftAssert();
+
+    public static void stopSoftAssertAll() {
+        softAssert.assertAll();
+    }
+
 
     public static void setDriver(WebDriver driver) {
         localDriver.set(driver);
@@ -33,6 +42,10 @@ public class Actions {
 
     public static String getAttribute(By locator, String attribute) {
         return findElement(locator).getAttribute(attribute);
+    }
+
+    public static void navigateToUrl(String url) {
+        DriverManager.getDriver().get(url);
     }
 
     public static String getText(By locator) {
