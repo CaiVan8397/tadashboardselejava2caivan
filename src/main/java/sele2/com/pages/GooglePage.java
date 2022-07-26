@@ -2,7 +2,6 @@ package sele2.com.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import sele2.com.driver.DriverManager;
 import sele2.com.utilities.Actions;
@@ -20,12 +19,12 @@ public class GooglePage {
 
 
     public void searchKey(String keyword) {
-        DriverManager.getDriver().findElement(searchBox).clear();
-        DriverManager.getDriver().findElement(searchBox).sendKeys(keyword + Keys.ENTER);
+        DriverManager.driver().findElement(searchBox).clear();
+        DriverManager.driver().findElement(searchBox).sendKeys(keyword + Keys.ENTER);
     }
 
     public void openTheFirstVideoResult() {
-        DriverManager.getDriver().findElement(videosResults).click();
+        DriverManager.driver().findElement(videosResults).click();
     }
 
     public boolean doesSearchBoxRemainKeyWord(String keyWord) {
@@ -49,7 +48,7 @@ public class GooglePage {
     }
 
     private boolean isTheKeyWordContainedInResults(String keyWord, By locator) {
-        List<String> results =  DriverManager.getDriver().findElements(locator).stream().map(WebElement::getText).filter(t -> !t.isEmpty()).collect(Collectors.toList());
+        List<String> results = DriverManager.driver().findElements(locator).stream().map(WebElement::getText).filter(t -> !t.isEmpty()).collect(Collectors.toList());
         for (String e : results) {
             if (!e.contains(keyWord)) {
                 System.out.println("The result " + e + " does not contains " + keyWord);

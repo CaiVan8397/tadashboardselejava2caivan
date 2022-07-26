@@ -2,7 +2,6 @@ package sele2.com.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,20 +16,20 @@ public class YoutubePage {
 
     public void playVideo() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(playButton));
-        DriverManager.getDriver().findElement(playButton).click();
+        DriverManager.driver().findElement(playButton).click();
     }
 
     public void pauseVideoAt(String time) {
-        Actions actions = new Actions( DriverManager.getDriver());
+        Actions actions = new Actions(DriverManager.driver());
         while (!getCurrentTime().equals(time)) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(title));
-            actions.moveToElement( DriverManager.getDriver().findElement(title)).build().perform();
-            actions.moveToElement( DriverManager.getDriver().findElement(videoScreen)).build().perform();
+            actions.moveToElement(DriverManager.driver().findElement(title)).build().perform();
+            actions.moveToElement(DriverManager.driver().findElement(videoScreen)).build().perform();
         }
         actions.sendKeys(Keys.SPACE).build().perform();
     }
 
     public String getCurrentTime() {
-        return  DriverManager.getDriver().findElement(currentTime).getText();
+        return DriverManager.driver().findElement(currentTime).getText();
     }
 }

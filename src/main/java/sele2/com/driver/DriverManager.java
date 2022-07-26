@@ -1,24 +1,22 @@
 package sele2.com.driver;
 
 import org.openqa.selenium.WebDriver;
+import sele2.com.enums.BrowserType;
 
 public class DriverManager {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    private DriverManager() {
+    public static void createDriver(BrowserType type) {
+        driver.set(WebDriverFactory.getWebDriver(type));
     }
 
-    public static WebDriver getDriver() {
+    public static WebDriver driver() {
         return driver.get();
     }
 
-    public static void setDriver(WebDriver driver) {
-        DriverManager.driver.set(driver);
-    }
-
-    public static void quit() {
-        DriverManager.getDriver().quit();
-        DriverManager.driver.remove();
+    public static void closeDriver() {
+        driver().close();
+        driver.remove();
     }
 }

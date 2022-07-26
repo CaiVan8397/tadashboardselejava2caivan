@@ -18,7 +18,7 @@ public class TestListener implements ITestListener {
         log.error("{} is failed", getTestMethodName(result));
 
         log.error("Screenshot captured for test case: {}", getTestMethodName(result));
-        saveScreenShotPNG(DriverManager.getDriver());
+        saveScreenShotPNG(DriverManager.driver());
         saveTextLog(getTestMethodName(result) + " failed and screenshot is taken");
     }
 

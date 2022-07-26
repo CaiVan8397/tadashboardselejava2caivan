@@ -9,7 +9,7 @@ import sele2.com.driver.DriverManager;
 public class Actions {
     private static final ThreadLocal<WebDriver> localDriver = new ThreadLocal<>();
 
-    private static SoftAssert softAssert = new SoftAssert();
+    private static final SoftAssert softAssert = new SoftAssert();
 
     public static void stopSoftAssertAll() {
         softAssert.assertAll();
@@ -45,7 +45,7 @@ public class Actions {
     }
 
     public static void navigateToUrl(String url) {
-        DriverManager.getDriver().get(url);
+        DriverManager.driver().get(url);
     }
 
     public static String getText(By locator) {
