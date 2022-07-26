@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Google test">
+
+    <test name="Google Test" parallel="classes" thread-count="2">
+        <parameter name="BROWSER" value="chrome"/>
+        <classes>
+            <class name="project.TAdashboard.testcases.GoogleTest"></class>
+            <class name="project.TAdashboard.testcases.GoogleTest2"></class>
+        </classes>
+    </test>
+
+</suite>
