@@ -22,7 +22,7 @@
         <allure.testng.version>2.13.9</allure.testng.version>
 
         <!-- Suite XML path -->
-        <suite.google.parallel>src/test/resources/suites/SuiteAll.xml</suite.google.parallel>
+        <test.suite.xml>src/test/resources/run-suites</test.suite.xml>
 
     </properties>
 
@@ -110,7 +110,7 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${suite.client.parallel}</suiteXmlFile>
+                        <suiteXmlFile>${test.suite.xml}</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
