@@ -8,21 +8,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import sele2.com.driver.DriverManager;
 
 public class YoutubePage {
-    WebDriverWait wait;
     private final By videoScreen = By.xpath("//div[@id='movie_player']");
     private final By playButton = By.xpath("//button[@aria-label='Play']");
     private final By currentTime = By.className("ytp-time-current");
     private final By title = By.xpath("//div[@id='container']/h1");
 
     public void playVideo() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(playButton));
         DriverManager.driver().findElement(playButton).click();
     }
 
     public void pauseVideoAt(String time) {
         Actions actions = new Actions(DriverManager.driver());
         while (!getCurrentTime().equals(time)) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(title));
             actions.moveToElement(DriverManager.driver().findElement(title)).build().perform();
             actions.moveToElement(DriverManager.driver().findElement(videoScreen)).build().perform();
         }

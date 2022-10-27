@@ -29,7 +29,7 @@ public class GoogleTest extends TestBase {
 
     @Test
     public void testYoutube() {
-        String timeToPause = "0:10";
+        String timeToPause = "0:30";
         Actions.navigateToUrl(Constant.GOOGLE_URL);
         googlePage.searchKey(keyword);
         googlePage.openTheFirstVideoResult();

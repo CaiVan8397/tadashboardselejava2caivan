@@ -22,7 +22,7 @@
         <allure.testng.version>2.13.9</allure.testng.version>
 
         <!-- Suite XML path -->
-        <test.suite.xml>src/test/resources/run-suites</test.suite.xml>
+        <test.suite.xml>src\test\resources\run-suites.testNG.xml</test.suite.xml>
 
     </properties>
 
